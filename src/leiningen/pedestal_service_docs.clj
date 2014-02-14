@@ -16,16 +16,15 @@
         service (symbol service-ns "service")
         head (head project)]
     (let [body (eval-in-project project
-                        `(do
-                           (println "Generating docs at docs/api.html")
-                           (let [docs# (pedestal-service-docs.core/generate-docs
-                                         ~head
-                                         '~project
-                                         ~service)
-                                   out-file# (clojure.java.io/file "docs" "api.html")]
-                               (clojure.java.io/make-parents out-file#)
-                               (spit out-file# docs#))
-                           (println "Done!")
-                           (System/exit 0))
-                        `(require '~service-ns-sym
-                                  'pedestal-service-docs.core))])))
+                                `(do
+                                   (println "Generating docs at docs/api.html")
+                                   (let [docs# (pedestal-service-docs.core/generate-docs
+                                                ~head
+                                                ~service)
+                                         out-file# (clojure.java.io/file "docs" "api.html")]
+                                     (clojure.java.io/make-parents out-file#)
+                                     (spit out-file# docs#))
+                                   (println "Done!")
+                                   (System/exit 0))
+                                `(require '~service-ns-sym
+                                          'pedestal-service-docs.core))])))
